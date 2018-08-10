@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweepStakes", "SweepStakes\SweepStakes.csproj", "{FC839B8C-AA3D-494B-9CF9-A2A1455202CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC839B8C-AA3D-494B-9CF9-A2A1455202CC}.Debug|x86.ActiveCfg = Debug|x86
+		{FC839B8C-AA3D-494B-9CF9-A2A1455202CC}.Debug|x86.Build.0 = Debug|x86
+		{FC839B8C-AA3D-494B-9CF9-A2A1455202CC}.Release|x86.ActiveCfg = Release|x86
+		{FC839B8C-AA3D-494B-9CF9-A2A1455202CC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal
