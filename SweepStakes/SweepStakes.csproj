@@ -41,6 +41,7 @@
     <Compile Include="ISweepstakesManager.cs" />
     <Compile Include="SweepstakesStackManager.cs" />
     <Compile Include="SweepstakesQueueManager.cs" />
+    <Compile Include="Manager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

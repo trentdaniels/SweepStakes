@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SweepStakes
 {
-    public class SweepstakesStackManager : ISweepstakesManager
+    public class SweepstakesStackManager : Manager, ISweepstakesManager
     {
         // Member Variables
         private Stack<Sweepstakes> stack;
@@ -19,7 +19,7 @@ namespace SweepStakes
         }
 
         // Methods
-        public Sweepstakes GetSweepstakes()
+        public override Sweepstakes GetSweepstakes()
         {
             DisplaySweepstakes();
             Console.WriteLine("Which sweepstake would you like to go to?");
@@ -35,7 +35,7 @@ namespace SweepStakes
             return GetSweepstakes();
         }
 
-        public void InsertSweepstakes(Sweepstakes sweepstakes)
+        public override void InsertSweepstakes(Sweepstakes sweepstakes)
         {
             stack.Push(sweepstakes);
         }
@@ -50,60 +50,12 @@ namespace SweepStakes
         }
 
 
-        public void DisplaySweepstakesManagerMenu()
-        {
-            Console.WriteLine("Main Menu:");
-            Console.WriteLine("[1]Create Sweepstake\n[2]Go To Sweepstake");
-            string userInput = Console.ReadLine();
-            switch (userInput)
-            {
-                case "1":
-                    Sweepstakes newSweepstake = CreateSweepstake();
-                    InsertSweepstakes(newSweepstake);
-                    break;
-                case "2":
-                    Sweepstakes selectedSweepstake = GetSweepstakes();
-                    DisplaySweepstakeMenu(selectedSweepstake);
-                    break;
-                default:
-                    UserInterface.DisplayErrorMessage();
-                    DisplaySweepstakesManagerMenu();
-                    return;
-
-            }
-            DisplaySweepstakesManagerMenu();
-            return;
-        }
 
 
-        public void DisplaySweepstakeMenu(Sweepstakes sweepstake)
-        {
-            Console.WriteLine($"Selected {sweepstake.Name}:");
-            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]Back to Main Menu");
-            string userInput = Console.ReadLine();
-            switch (userInput)
-            {
-                case "1":
-                    sweepstake.HandleContestant();
-                    DisplaySweepstakeMenu(sweepstake);
-                    return;
-                case "2":
-                    sweepstake.HandleWinner();
-                    DisplaySweepstakeMenu(sweepstake);
-                    return;
-                case "3":
-                    DisplaySweepstakesManagerMenu();
-                    break;
-            }
-        }
 
-        public Sweepstakes CreateSweepstake()
-        {
-            Console.WriteLine("What is the name of the sweepstake?");
-            string sweepstakeName = Console.ReadLine();
-            Sweepstakes newSweepstake = new Sweepstakes(sweepstakeName);
-            return newSweepstake;
-        }
+
+
+
 
     }
 }

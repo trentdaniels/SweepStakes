@@ -79,5 +79,25 @@ namespace SweepStakes
             Console.WriteLine(contestant.Email);
             Console.WriteLine(contestant.RegistrationNumber);
         }
+
+        public void DisplayMenu()
+        {
+            Console.WriteLine($"Selected {Name}:");
+            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]Back to Main Menu");
+            string userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    HandleContestant();
+                    DisplayMenu();
+                    return;
+                case "2":
+                    HandleWinner();
+                    DisplayMenu();
+                    return;
+                case "3":
+                    return;
+            }
+        }
     }
 }
