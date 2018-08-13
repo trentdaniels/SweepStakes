@@ -28,7 +28,7 @@ namespace SweepStakes
         public void RegisterContestant(Contestant contestant)
         {
             contestant.RegistrationNumber = numberOfContestants;
-            dictionary.Add(numberOfContestants, contestant);
+            dictionary.Add(contestant.RegistrationNumber, contestant);
             numberOfContestants++;
             
         }
@@ -48,7 +48,7 @@ namespace SweepStakes
 
                 }
             }
-            return "No winner found."
+            return "No winner found.";
         }
 
         public void PrintContestantInfo(Contestant contestant)

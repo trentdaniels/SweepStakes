@@ -3,7 +3,7 @@ namespace SweepStakes
 {
     public interface ISweepstakesManager
     {
-        void InsertSweepStakes(Sweepstakes sweepstakes);
+        void InsertSweepstakes(Sweepstakes sweepstakes);
 
         Sweepstakes GetSweepstakes();
     }

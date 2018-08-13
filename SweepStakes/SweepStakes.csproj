@@ -39,6 +39,8 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="Sweepstakes.cs" />
     <Compile Include="ISweepstakesManager.cs" />
+    <Compile Include="SweepstakesStackManager.cs" />
+    <Compile Include="SweepstakesQueueManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
