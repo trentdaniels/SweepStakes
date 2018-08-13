@@ -6,9 +6,9 @@ namespace SweepStakes
         // Member Variables
 
         // Constructor
-        public MarketingFirm()
+        public MarketingFirm(ISweepstakesManager manager)
         {
-            UserInterface.DisplaySweepstakesManagerMenu(UserInterface.GetManager());
+            UserInterface.DisplaySweepstakesManagerMenu(manager);
         }
 
         // Methods
