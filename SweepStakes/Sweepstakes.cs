@@ -9,7 +9,7 @@ namespace SweepStakes
         private string name;
         private Dictionary<int, Contestant> contestants;
         private Random random;
-        private Contestant winner;
+        Contestant winner;
 
         public string Name { get => name;}
         public Dictionary<int,Contestant> Contestants { get => contestants; set => contestants = value; }
@@ -34,21 +34,26 @@ namespace SweepStakes
         public void HandleContestant()
         {
             Contestant contestant = new Contestant();
+            UserInterface.GetNewContestantInformation(contestant);
             RegisterContestant(contestant);
             Console.WriteLine($"Registered {contestant.FullName}.");
         }
 
         public void HandleWinner()
         {
+            string winnerName;
             string contestWinner = PickWinner();
-            for (int i = 1; i < contestants.Count; i++)
+            for (int i = 0; i < contestants.Count; i++)
             {
                 if (contestWinner == contestants[i].FullName)
                 {
                     winner = contestants[i];
+                    winnerName = contestants[i].FullName;
+                    Console.WriteLine($"{winnerName} won the {name} sweepstakes!");
+                    return;
                 }
             }
-            Console.WriteLine($"{winner.FullName} won the {name} sweepstakes!");
+
         }
 
 
@@ -57,12 +62,13 @@ namespace SweepStakes
             int winningRegistrationNumber;
             string contestWinner;
 
-            winningRegistrationNumber = random.Next(0, contestants.Count);
+            winningRegistrationNumber = random.Next(1, contestants.Count);
             for (int i = 0; i < contestants.Count; i++)
             {
                 if (winningRegistrationNumber == contestants[i].RegistrationNumber)
                 {
                     contestWinner = contestants[i].FullName;
+                    contestants[i].IsWinner = true;
                     return contestWinner;
 
                 }

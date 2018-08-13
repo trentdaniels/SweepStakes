@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SweepStakes
 {
@@ -19,13 +20,18 @@ namespace SweepStakes
         // Methods
         public Sweepstakes GetSweepstakes()
         {
-
-            Sweepstakes newSweepstakes;
-            string newSweepstakesName = UserInterface.GetSweepstakesName();
-            newSweepstakes = new Sweepstakes(newSweepstakesName);
-            return newSweepstakes;
-
-
+            DisplaySweepstakes();
+            Console.WriteLine("Which sweepstake would you like to go to?");
+            string selectedSweepstake = Console.ReadLine();
+            for (int i = 0; i < queue.Count; i++)
+            {
+                if (selectedSweepstake.ToLower() == queue.ElementAt(i).Name.ToLower())
+                {
+                    return queue.ElementAt(i);
+                }
+            }
+            UserInterface.DisplayErrorMessage();
+            return GetSweepstakes();
         }
 
         public void InsertSweepstakes(Sweepstakes sweepstakes)
@@ -38,7 +44,7 @@ namespace SweepStakes
             foreach (Sweepstakes sweepstake in queue)
             {
                 Console.WriteLine("Here are your current sweepstakes:");
-                Console.WriteLine(sweepstake);
+                Console.WriteLine(sweepstake.Name);
             }
         }
     }

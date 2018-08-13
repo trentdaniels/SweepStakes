@@ -4,7 +4,7 @@ namespace SweepStakes
     public static class UserInterface
     {
 
-        public static string GetFirstName()
+        private static string GetFirstName()
         {
             string firstName;
             Console.WriteLine("What is the contestant's first name?");
@@ -12,14 +12,14 @@ namespace SweepStakes
             return firstName;
         }
 
-        public static string GetLastName()
+        private static string GetLastName()
         {
             string lastName;
             Console.WriteLine("What is the contestant's last name?");
             lastName = Console.ReadLine();
             return lastName;
         }
-        public static string GetEmail()
+        private static string GetEmail()
         {
             string email;
             Console.WriteLine("What is the contestant's email address?");
@@ -27,13 +27,6 @@ namespace SweepStakes
             return email;
         }
 
-
-
-        public static int GetRegistrationNumber(int currentRegistrationNumber)
-        {
-            currentRegistrationNumber++;
-            return currentRegistrationNumber;
-        }
 
         public static string GetSweepstakesName()
         {
@@ -76,6 +69,34 @@ namespace SweepStakes
             return selectedContestant;
         }
 
+        private static void HandleContestantProfileView(Sweepstakes sweepstakes)
+        {
+            DisplayContestants(sweepstakes);
+            string selectedContestant = SelectContestant();
+            for (int i = 0; i < sweepstakes.Contestants.Count; i++)
+            {
+                if (selectedContestant == sweepstakes.Contestants[i].RegistrationNumber.ToString())
+                {
+                    Console.WriteLine("Found Contestant:");
+                    DisplayContestant(sweepstakes.Contestants[i]);
+                }
+            }
+        }
+
+        public static void DisplayContestant(Contestant contestant)
+        {
+            Console.WriteLine($"Name: {contestant.FullName}\nEmail: {contestant.Email}\nRegistration Number: {contestant.RegistrationNumber}\nWinner: {(contestant.IsWinner ? "Yes" : "No")}");
+        }
+
+        private static void DisplayContestants(Sweepstakes sweepstakes)
+        {
+            Console.WriteLine("Registered Contestants:");
+            for (int i = 0; i < sweepstakes.Contestants.Count; i++)
+            {
+                Console.WriteLine($"[{sweepstakes.Contestants[i].RegistrationNumber}] {sweepstakes.Contestants[i].FullName}");
+            }
+        }
+
         public static void DisplaySweepstakesManagerMenu(ISweepstakesManager manager)
         {
             Console.WriteLine("Main Menu:");
@@ -101,7 +122,7 @@ namespace SweepStakes
             return;
         }
 
-        public static Sweepstakes CreateSweepstake()
+        private static Sweepstakes CreateSweepstake()
         {
             Console.WriteLine("What is the name of the sweepstake?");
             string sweepstakeName = Console.ReadLine();
@@ -109,44 +130,44 @@ namespace SweepStakes
             return newSweepstake;
         }
 
-        public static void DisplaySweepstakeMenu(Sweepstakes sweepstake)
+        private static void DisplaySweepstakeMenu(Sweepstakes sweepstake)
         {
             Console.WriteLine($"Selected {sweepstake.Name}:");
-            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]View Contestants\n[4]View Contestant Information\n[5]Back to Main Menu");
+            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]View Contestants\n[4]View Contestant Information\n[5]View Winner\n[6]Back to Main Menu");
             string userInput = Console.ReadLine();
             switch (userInput)
             {
                 case "1":
                     sweepstake.HandleContestant();
-                    DisplaySweepstakeMenu(sweepstake);
                     break;
                 case "2":
                     sweepstake.HandleWinner();
-                    DisplaySweepstakeMenu(sweepstake);
                     break;
                 case "3":
                     sweepstake.DisplayContestants();
-                    DisplaySweepstakeMenu(sweepstake);
                     break;
                 case "4":
-
+                    HandleContestantProfileView(sweepstake);
                     break;
                 case "5":
+                    DisplayContestant(sweepstake.Winner);
                     break;
+                case "6":
+                    return;
                 default:
                     DisplayErrorMessage();
-                    DisplaySweepstakeMenu(sweepstake);
                     break;
             }
+            DisplaySweepstakeMenu(sweepstake);
             return;
         }
 
-        public static void GetInformation(Contestant contestant)
+        public static void GetNewContestantInformation(Contestant contestant)
         {
             contestant.FirstName = GetFirstName();
             contestant.LastName = GetLastName();
             contestant.Email = GetEmail();
-
+            contestant.FullName = $"{contestant.FirstName} {contestant.LastName}";
         }
 
 
