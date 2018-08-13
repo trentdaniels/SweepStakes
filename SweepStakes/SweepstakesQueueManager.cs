@@ -14,7 +14,6 @@ namespace SweepStakes
         public SweepstakesQueueManager()
         {
             queue = new Queue<Sweepstakes>();
-            UserInterface.DisplaySweepstakesManagerMenu();
         }
 
         // Methods

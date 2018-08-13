@@ -76,9 +76,8 @@ namespace SweepStakes
             return selectedContestant;
         }
 
-        public static void DisplaySweepstakesManagerMenu()
+        public static void DisplaySweepstakesManagerMenu(ISweepstakesManager manager)
         {
-            ISweepstakesManager manager = GetManager();
             Console.WriteLine("Main Menu:");
             Console.WriteLine("[1]Create Sweepstake\n[2]Go To Sweepstake");
             string userInput = Console.ReadLine();
@@ -87,17 +86,18 @@ namespace SweepStakes
                 case "1":
                     Sweepstakes newSweepstake = CreateSweepstake();
                     manager.InsertSweepstakes(newSweepstake);
+                    Console.WriteLine($"Added {newSweepstake.Name} to list of sweepstakes.");
                     break;
                 case "2":
                     Sweepstakes selectedSweepstake = manager.GetSweepstakes();
-                    selectedSweepstake.DisplayMenu();
+                    DisplaySweepstakeMenu(selectedSweepstake);
                     break;
                 default:
                     DisplayErrorMessage();
                     break;
 
             }
-            DisplaySweepstakesManagerMenu();
+            DisplaySweepstakesManagerMenu(manager);
             return;
         }
 
@@ -139,6 +139,14 @@ namespace SweepStakes
                     break;
             }
             return;
+        }
+
+        public static void GetInformation(Contestant contestant)
+        {
+            contestant.FirstName = GetFirstName();
+            contestant.LastName = GetLastName();
+            contestant.Email = GetEmail();
+
         }
 
 

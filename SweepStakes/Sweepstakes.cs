@@ -35,6 +35,7 @@ namespace SweepStakes
         {
             Contestant contestant = new Contestant();
             RegisterContestant(contestant);
+            Console.WriteLine($"Registered {contestant.FullName}.");
         }
 
         public void HandleWinner()
@@ -86,37 +87,6 @@ namespace SweepStakes
             }
         }
 
-        public void DisplayMenu()
-        {
-            Console.WriteLine($"Selected {Name}:");
-            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]View Contestants\n[4]View Contestant Information\n[5]Back to Main Menu");
-            string userInput = Console.ReadLine();
-            switch (userInput)
-            {
-                case "1":
-                    HandleContestant();
-                    DisplayMenu();
-                    break;
-                case "2":
-                    HandleWinner();
-                    DisplayMenu();
-                    break;
-                case "3":
-                    DisplayContestants();
-                    DisplayMenu();
-                    break;
-                case "4":
-                    
-                    break;
-                case "5":
-                    break;
-                default:
-                    UserInterface.DisplayErrorMessage();
-                    DisplayMenu();
-                    break;
-            }
-            return;
-        }
 
         public Contestant GetContestant()
         {

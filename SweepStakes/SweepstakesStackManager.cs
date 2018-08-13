@@ -15,7 +15,6 @@ namespace SweepStakes
         public SweepstakesStackManager()
         {
             stack = new Stack<Sweepstakes>();
-            UserInterface.DisplaySweepstakesManagerMenu();
         }
 
         // Methods
