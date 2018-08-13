@@ -37,6 +37,8 @@
     <Compile Include="MarketingFirm.cs" />
     <Compile Include="Contestant.cs" />
     <Compile Include="UserInterface.cs" />
+    <Compile Include="Sweepstakes.cs" />
+    <Compile Include="ISweepstakesManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

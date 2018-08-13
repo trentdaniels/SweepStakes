@@ -7,14 +7,20 @@ namespace SweepStakes
         private string lastName;
         private string email;
         private int registrationNumber;
+        private readonly string fullName;
 
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
         public string Email { get => email; set => email = value; }
         public int RegistrationNumber { get => registrationNumber; set => registrationNumber = value; }
+        public string FullName { get => fullName; }
 
         public Contestant()
         {
+            firstName = UserInterface.GetFirstName();
+            lastName = UserInterface.GetLastName();
+            email = UserInterface.GetEmail();
+            fullName = $"{firstName} {lastName}";
         }
     }
 }
