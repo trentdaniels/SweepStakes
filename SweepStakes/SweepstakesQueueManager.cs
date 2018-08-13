@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SweepStakes
 {
-    public class SweepstakesQueueManager : Manager, ISweepstakesManager
+    public class SweepstakesQueueManager : ISweepstakesManager
     {
         // Member Variables
         private Queue<Sweepstakes> queue;
@@ -14,11 +14,11 @@ namespace SweepStakes
         public SweepstakesQueueManager()
         {
             queue = new Queue<Sweepstakes>();
-            DisplaySweepstakesManagerMenu();
+            UserInterface.DisplaySweepstakesManagerMenu();
         }
 
         // Methods
-        public override Sweepstakes GetSweepstakes()
+        public Sweepstakes GetSweepstakes()
         {
 
             Sweepstakes newSweepstakes;
@@ -29,7 +29,7 @@ namespace SweepStakes
 
         }
 
-        public override void InsertSweepstakes(Sweepstakes sweepstakes)
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
         {
             queue.Enqueue(sweepstakes);
         }

@@ -7,21 +7,19 @@ namespace SweepStakes
     {
         // Member Variables
         private string name;
-        private Dictionary<int, Contestant> dictionary;
-        private int numberOfContestants;
+        private Dictionary<int, Contestant> contestants;
         private Random random;
         private Contestant winner;
 
         public string Name { get => name;}
-        public Dictionary<int,Contestant> Dictionary { get => dictionary; set => dictionary = value; }
+        public Dictionary<int,Contestant> Contestants { get => contestants; set => contestants = value; }
         public Contestant Winner { get => winner; }
 
         // Constructor
         public Sweepstakes(string name)
         {
             this.name = name;
-            dictionary = new Dictionary<int, Contestant>();
-            numberOfContestants = 01;
+            contestants = new Dictionary<int, Contestant>();
             random = new Random();
         }
 
@@ -29,10 +27,8 @@ namespace SweepStakes
         // Methods
         public void RegisterContestant(Contestant contestant)
         {
-            contestant.RegistrationNumber = numberOfContestants;
-            dictionary.Add(contestant.RegistrationNumber, contestant);
-            numberOfContestants++;
-            
+            contestants.Add(contestants.Count, contestant);
+            contestant.RegistrationNumber = contestants.Count;
         }
 
         public void HandleContestant()
@@ -44,11 +40,11 @@ namespace SweepStakes
         public void HandleWinner()
         {
             string contestWinner = PickWinner();
-            for (int i = 1; i < dictionary.Count; i++)
+            for (int i = 1; i < contestants.Count; i++)
             {
-                if (contestWinner == dictionary[i].FullName)
+                if (contestWinner == contestants[i].FullName)
                 {
-                    winner = dictionary[i];
+                    winner = contestants[i];
                 }
             }
             Console.WriteLine($"{winner.FullName} won the {name} sweepstakes!");
@@ -60,12 +56,12 @@ namespace SweepStakes
             int winningRegistrationNumber;
             string contestWinner;
 
-            winningRegistrationNumber = random.Next(1, numberOfContestants + 1);
-            for (int i = 1; i < numberOfContestants; i++)
+            winningRegistrationNumber = random.Next(0, contestants.Count);
+            for (int i = 0; i < contestants.Count; i++)
             {
-                if (winningRegistrationNumber == dictionary[i].RegistrationNumber)
+                if (winningRegistrationNumber == contestants[i].RegistrationNumber)
                 {
-                    contestWinner = dictionary[i].FullName;
+                    contestWinner = contestants[i].FullName;
                     return contestWinner;
 
                 }
@@ -80,24 +76,60 @@ namespace SweepStakes
             Console.WriteLine(contestant.RegistrationNumber);
         }
 
+        public void DisplayContestants()
+        {
+            Console.WriteLine("Current Contestants:");
+
+            for (int i = 0; i < contestants.Count; i++)
+            {
+                Console.WriteLine(contestants[i].FullName);
+            }
+        }
+
         public void DisplayMenu()
         {
             Console.WriteLine($"Selected {Name}:");
-            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]Back to Main Menu");
+            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]View Contestants\n[4]View Contestant Information\n[5]Back to Main Menu");
             string userInput = Console.ReadLine();
             switch (userInput)
             {
                 case "1":
                     HandleContestant();
                     DisplayMenu();
-                    return;
+                    break;
                 case "2":
                     HandleWinner();
                     DisplayMenu();
-                    return;
+                    break;
                 case "3":
-                    return;
+                    DisplayContestants();
+                    DisplayMenu();
+                    break;
+                case "4":
+                    
+                    break;
+                case "5":
+                    break;
+                default:
+                    UserInterface.DisplayErrorMessage();
+                    DisplayMenu();
+                    break;
             }
+            return;
+        }
+
+        public Contestant GetContestant()
+        {
+            string selectedContestantName = UserInterface.SelectContestant();
+            for (int i = 0; i < contestants.Count; i++)
+            {
+                if (contestants[i].FullName == selectedContestantName)
+                {
+                    return contestants[i];
+                }
+            }
+            UserInterface.DisplayErrorMessage();
+            return GetContestant();
         }
     }
 }

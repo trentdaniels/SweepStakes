@@ -7,7 +7,7 @@ namespace SweepStakes
         public static string GetFirstName()
         {
             string firstName;
-            Console.WriteLine("Hello Contestant. What is your first name?");
+            Console.WriteLine("What is the contestant's first name?");
             firstName = Console.ReadLine();
             return firstName;
         }
@@ -15,17 +15,19 @@ namespace SweepStakes
         public static string GetLastName()
         {
             string lastName;
-            Console.WriteLine("What is your last name?");
+            Console.WriteLine("What is the contestant's last name?");
             lastName = Console.ReadLine();
             return lastName;
         }
         public static string GetEmail()
         {
             string email;
-            Console.WriteLine("What is your email address?");
+            Console.WriteLine("What is the contestant's email address?");
             email = Console.ReadLine();
             return email;
         }
+
+
 
         public static int GetRegistrationNumber(int currentRegistrationNumber)
         {
@@ -67,9 +69,77 @@ namespace SweepStakes
             Console.WriteLine("Invalid option. Please try again.");
         }
 
+        public static string SelectContestant()
+        {
+            Console.WriteLine("Which contestant would you like to view?");
+            string selectedContestant = Console.ReadLine();
+            return selectedContestant;
+        }
 
+        public static void DisplaySweepstakesManagerMenu()
+        {
+            ISweepstakesManager manager = GetManager();
+            Console.WriteLine("Main Menu:");
+            Console.WriteLine("[1]Create Sweepstake\n[2]Go To Sweepstake");
+            string userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    Sweepstakes newSweepstake = CreateSweepstake();
+                    manager.InsertSweepstakes(newSweepstake);
+                    break;
+                case "2":
+                    Sweepstakes selectedSweepstake = manager.GetSweepstakes();
+                    selectedSweepstake.DisplayMenu();
+                    break;
+                default:
+                    DisplayErrorMessage();
+                    break;
 
+            }
+            DisplaySweepstakesManagerMenu();
+            return;
+        }
 
+        public static Sweepstakes CreateSweepstake()
+        {
+            Console.WriteLine("What is the name of the sweepstake?");
+            string sweepstakeName = Console.ReadLine();
+            Sweepstakes newSweepstake = new Sweepstakes(sweepstakeName);
+            return newSweepstake;
+        }
+
+        public static void DisplaySweepstakeMenu(Sweepstakes sweepstake)
+        {
+            Console.WriteLine($"Selected {sweepstake.Name}:");
+            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]View Contestants\n[4]View Contestant Information\n[5]Back to Main Menu");
+            string userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    sweepstake.HandleContestant();
+                    DisplaySweepstakeMenu(sweepstake);
+                    break;
+                case "2":
+                    sweepstake.HandleWinner();
+                    DisplaySweepstakeMenu(sweepstake);
+                    break;
+                case "3":
+                    sweepstake.DisplayContestants();
+                    DisplaySweepstakeMenu(sweepstake);
+                    break;
+                case "4":
+
+                    break;
+                case "5":
+                    break;
+                default:
+                    DisplayErrorMessage();
+                    DisplaySweepstakeMenu(sweepstake);
+                    break;
+            }
+            return;
+        }
 
 
     }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SweepStakes
 {
-    public class SweepstakesStackManager : Manager, ISweepstakesManager
+    public class SweepstakesStackManager : ISweepstakesManager
     {
         // Member Variables
         private Stack<Sweepstakes> stack;
@@ -15,11 +15,11 @@ namespace SweepStakes
         public SweepstakesStackManager()
         {
             stack = new Stack<Sweepstakes>();
-            DisplaySweepstakesManagerMenu();
+            UserInterface.DisplaySweepstakesManagerMenu();
         }
 
         // Methods
-        public override Sweepstakes GetSweepstakes()
+        public Sweepstakes GetSweepstakes()
         {
             DisplaySweepstakes();
             Console.WriteLine("Which sweepstake would you like to go to?");
@@ -35,7 +35,7 @@ namespace SweepStakes
             return GetSweepstakes();
         }
 
-        public override void InsertSweepstakes(Sweepstakes sweepstakes)
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
         {
             stack.Push(sweepstakes);
         }

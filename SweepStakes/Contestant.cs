@@ -17,10 +17,16 @@ namespace SweepStakes
 
         public Contestant()
         {
+            GetInformation();
+            fullName = $"{firstName} {lastName}";
+        }
+
+        public void GetInformation()
+        {
             firstName = UserInterface.GetFirstName();
             lastName = UserInterface.GetLastName();
             email = UserInterface.GetEmail();
-            fullName = $"{firstName} {lastName}";
+
         }
     }
 }
