@@ -10,9 +10,11 @@ namespace SweepStakes
         private Dictionary<int, Contestant> dictionary;
         private int numberOfContestants;
         private Random random;
+        private Contestant winner;
 
         public string Name { get => name;}
         public Dictionary<int,Contestant> Dictionary { get => dictionary; set => dictionary = value; }
+        public Contestant Winner { get => winner; }
 
         // Constructor
         public Sweepstakes(string name)
@@ -27,24 +29,44 @@ namespace SweepStakes
         // Methods
         public void RegisterContestant(Contestant contestant)
         {
+            contestant.RegistrationNumber = numberOfContestants;
             dictionary.Add(contestant.RegistrationNumber, contestant);
             numberOfContestants++;
             
+        }
+
+        public void HandleContestant()
+        {
+            Contestant contestant = new Contestant();
+            RegisterContestant(contestant);
+        }
+
+        public void HandleWinner()
+        {
+            string contestWinner = PickWinner();
+            for (int i = 1; i < dictionary.Count; i++)
+            {
+                if (contestWinner == dictionary[i].FullName)
+                {
+                    winner = dictionary[i];
+                }
+            }
+            Console.WriteLine($"{winner.FullName} won the {name} sweepstakes!");
         }
 
 
         public string PickWinner()
         {
             int winningRegistrationNumber;
-            string winner;
+            string contestWinner;
 
             winningRegistrationNumber = random.Next(1, numberOfContestants + 1);
             for (int i = 1; i < numberOfContestants; i++)
             {
                 if (winningRegistrationNumber == dictionary[i].RegistrationNumber)
                 {
-                    winner = dictionary[i].FullName;
-                    return winner;
+                    contestWinner = dictionary[i].FullName;
+                    return contestWinner;
 
                 }
             }

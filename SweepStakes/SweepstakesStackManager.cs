@@ -78,8 +78,23 @@ namespace SweepStakes
 
         public void DisplaySweepstakeMenu(Sweepstakes sweepstake)
         {
-            Console.WriteLine($"Selected {sweepstake.Name}");
-            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]View Contestants");
+            Console.WriteLine($"Selected {sweepstake.Name}:");
+            Console.WriteLine("What would you like to do?\n[1]Register Contestant\n[2]Pick Winner\n[3]Back to Main Menu");
+            string userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    sweepstake.HandleContestant();
+                    DisplaySweepstakeMenu(sweepstake);
+                    return;
+                case "2":
+                    sweepstake.HandleWinner();
+                    DisplaySweepstakeMenu(sweepstake);
+                    return;
+                case "3":
+                    DisplaySweepstakesManagerMenu();
+                    break;
+            }
         }
 
         public Sweepstakes CreateSweepstake()
