@@ -15,14 +15,20 @@ namespace SweepStakes
         }
 
         // Methods
-        public void GetSweepstakes()
+        public Sweepstakes GetSweepstakes()
         {
-            
+
+            Sweepstakes newSweepstakes;
+            string newSweepstakesName = UserInterface.GetSweepstakesName();
+            newSweepstakes = new Sweepstakes(newSweepstakesName);
+            return newSweepstakes;
+
+
         }
 
-        public Sweepstakes InsertSweepstakes(Sweepstakes sweepstakes)
+        public void InsertSweepstakes(Sweepstakes sweepstakes)
         {
-            
+            stack.Push(sweepstakes);
         }
     }
 }

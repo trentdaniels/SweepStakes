@@ -27,7 +27,6 @@ namespace SweepStakes
         // Methods
         public void RegisterContestant(Contestant contestant)
         {
-            contestant.RegistrationNumber = numberOfContestants;
             dictionary.Add(contestant.RegistrationNumber, contestant);
             numberOfContestants++;
             
@@ -38,7 +37,7 @@ namespace SweepStakes
             int winningRegistrationNumber;
             string winner;
 
-            winningRegistrationNumber = random.Next(1, dictionary.Count);
+            winningRegistrationNumber = random.Next(1, numberOfContestants + 1);
             for (int i = 1; i < numberOfContestants; i++)
             {
                 if (winningRegistrationNumber == dictionary[i].RegistrationNumber)

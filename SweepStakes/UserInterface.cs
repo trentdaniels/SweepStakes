@@ -32,5 +32,40 @@ namespace SweepStakes
             currentRegistrationNumber++;
             return currentRegistrationNumber;
         }
+
+        public static string GetSweepstakesName()
+        {
+            string userResponse;
+            Console.WriteLine("What is the name of this sweepstake?");
+            userResponse = Console.ReadLine();
+            return userResponse;
+        }
+
+        public static ISweepstakesManager GetManager()
+        {
+            string userInput;
+            ISweepstakesManager manager;
+            Console.WriteLine("What kind of manager would you like to create?\n[1]Stack\n[2]Queue");
+            userInput = Console.ReadLine();
+            switch(userInput)
+            {
+                case "1":
+                    manager = new SweepstakesStackManager();
+                    break;
+                case "2":
+                    manager = new SweepstakesQueueManager();
+                    break;
+                default:
+                    DisplayErrorMessage();
+                    return GetManager();
+            }
+            return manager;
+        }
+
+        public static void DisplayErrorMessage()
+        {
+            Console.WriteLine("Invalid option. Please try again.");
+        }
     }
+
 }
