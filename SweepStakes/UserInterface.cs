@@ -176,12 +176,12 @@ namespace SweepStakes
 
         public static void EmailContestants(Sweepstakes sweepstakes)
         {
-            string from = "trent.test1234@gmail.com";
+            string from = "email@email.com";
             for (int i = 0; i < sweepstakes.Contestants.Count; i ++)
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient();
-                mail.From = new MailAddress(from, "Trent Daniels");
+                mail.From = new MailAddress(from, "Marketing Team");
                 mail.To.Add(sweepstakes.Contestants[i].Email);
                 smtpClient.Port = 25;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -189,7 +189,7 @@ namespace SweepStakes
                 smtpClient.Host = "smtp.gmail.com";
                 smtpClient.EnableSsl = true;
 
-                smtpClient.Credentials = new NetworkCredential("trent.test1234@gmail.com", "daniels4");
+                // Needs credentials to work
                 if (sweepstakes.Contestants[i].Email == sweepstakes.Winner.Email)
                 {
                     mail.Subject = $"CONGRATULATIONS!";
