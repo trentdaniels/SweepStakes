@@ -6,7 +6,8 @@ namespace SweepStakes
     {
         public static void Main(string[] args)
         {
-            MarketingFirm marketingFirm = new MarketingFirm();
+            ISweepstakesManager manager = UserInterface.GetManager();
+            MarketingFirm marketingFirm = new MarketingFirm(manager);
         }
     }
 }
