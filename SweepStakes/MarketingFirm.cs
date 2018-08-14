@@ -7,9 +7,9 @@ namespace SweepStakes
         ISweepstakesManager manager;
 
         // Constructor
-        public MarketingFirm()
+        public MarketingFirm(ISweepstakesManager manager)
         {
-            manager = UserInterface.GetManager();
+            this.manager = manager;
             UserInterface.DisplayManagerMenu(manager);
         }
 
