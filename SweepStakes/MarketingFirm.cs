@@ -8,7 +8,7 @@ namespace SweepStakes
         // Constructor
         public MarketingFirm(ISweepstakesManager manager)
         {
-            UserInterface.DisplaySweepstakesManagerMenu(manager);
+            UserInterface.DisplayManagerMenu(manager);
         }
 
         // Methods

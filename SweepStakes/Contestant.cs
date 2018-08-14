@@ -8,6 +8,7 @@ namespace SweepStakes
         private string email;
         private int registrationNumber;
         private string fullName;
+        private bool isWinner;
 
 
         public string FirstName { get => firstName; set => firstName = value; }
@@ -15,7 +16,7 @@ namespace SweepStakes
         public string Email { get => email; set => email = value; }
         public int RegistrationNumber { get => registrationNumber; set => registrationNumber = value; }
         public string FullName { get => fullName; set => fullName = value; }
-        public bool IsWinner { get; set; }
+        public bool IsWinner { get => isWinner; set => isWinner = value; }
 
         public Contestant()
         {

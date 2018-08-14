@@ -25,13 +25,13 @@ namespace SweepStakes
 
 
         // Methods
-        public void RegisterContestant(Contestant contestant)
+        private void RegisterContestant(Contestant contestant)
         {
             contestants.Add(contestants.Count, contestant);
             contestant.RegistrationNumber = contestants.Count;
         }
 
-        public void HandleContestant()
+        public void HandleContestantCreation()
         {
             Contestant contestant = new Contestant();
             UserInterface.GetNewContestantInformation(contestant);
@@ -39,7 +39,7 @@ namespace SweepStakes
             Console.WriteLine($"Registered {contestant.FullName}.");
         }
 
-        public void HandleWinner()
+        public void DetermineWinner()
         {
             string winnerName;
             string contestWinner = PickWinner();
@@ -57,7 +57,7 @@ namespace SweepStakes
         }
 
 
-        public string PickWinner()
+        private string PickWinner()
         {
             int winningRegistrationNumber;
             string contestWinner;
@@ -76,25 +76,7 @@ namespace SweepStakes
             return "No winner found.";
         }
 
-        public void PrintContestantInfo(Contestant contestant)
-        {
-            Console.WriteLine(contestant.FullName);
-            Console.WriteLine(contestant.Email);
-            Console.WriteLine(contestant.RegistrationNumber);
-        }
-
-        public void DisplayContestants()
-        {
-            Console.WriteLine("Current Contestants:");
-
-            for (int i = 0; i < contestants.Count; i++)
-            {
-                Console.WriteLine(contestants[i].FullName);
-            }
-        }
-
-
-        public Contestant GetContestant()
+        private Contestant GetContestant()
         {
             string selectedContestantName = UserInterface.SelectContestant();
             for (int i = 0; i < contestants.Count; i++)
