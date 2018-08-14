@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net;
+using System.Net.Mail;
+
 namespace SweepStakes
 {
     public static class UserInterface
@@ -142,6 +145,7 @@ namespace SweepStakes
                     break;
                 case "2":
                     sweepstake.HandleWinner();
+                    EmailContestants(sweepstake);
                     break;
                 case "3":
                     sweepstake.DisplayContestants();
@@ -170,7 +174,39 @@ namespace SweepStakes
             contestant.FullName = $"{contestant.FirstName} {contestant.LastName}";
         }
 
+        public static void EmailContestants(Sweepstakes sweepstakes)
+        {
+            string from = "trent.test1234@gmail.com";
+            for (int i = 0; i < sweepstakes.Contestants.Count; i ++)
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient();
+                mail.From = new MailAddress(from, "Trent Daniels");
+                mail.To.Add(sweepstakes.Contestants[i].Email);
+                smtpClient.Port = 25;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.EnableSsl = true;
+
+                smtpClient.Credentials = new NetworkCredential("trent.test1234@gmail.com", "daniels4");
+                if (sweepstakes.Contestants[i].Email == sweepstakes.Winner.Email)
+                {
+                    mail.Subject = $"CONGRATULATIONS!";
+                    mail.Body = $"Congratulations {sweepstakes.Winner.FullName}! You have won the {sweepstakes.Name} sweepstakes!";
+                }
+                else
+                {
+                    mail.Subject = $"Results from the {sweepstakes.Name} Sweepstakes";
+                    mail.Body = $"Sorry {sweepstakes.Contestants[i].FullName}, you have lost the {sweepstakes.Name} sweepstakes. Try again next time!";
+                }
+                smtpClient.Send(mail);
+            }
+            Console.WriteLine("Sent emails to contestants.");
+        }
+
 
     }
 
 }
+

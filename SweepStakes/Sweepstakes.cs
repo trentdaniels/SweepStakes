@@ -107,5 +107,7 @@ namespace SweepStakes
             UserInterface.DisplayErrorMessage();
             return GetContestant();
         }
+
+
     }
 }
