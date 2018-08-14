@@ -4,10 +4,12 @@ namespace SweepStakes
     public class MarketingFirm
     {
         // Member Variables
+        ISweepstakesManager manager;
 
         // Constructor
-        public MarketingFirm(ISweepstakesManager manager)
+        public MarketingFirm()
         {
+            manager = UserInterface.GetManager();
             UserInterface.DisplayManagerMenu(manager);
         }
 

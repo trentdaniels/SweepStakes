@@ -191,11 +191,15 @@ namespace SweepStakes
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient();
 <<<<<<< HEAD
+<<<<<<< HEAD
                 mail.From = new MailAddress(from, "Trent Daniels");
                 mail.To.Add(sweepstakes.Contestants[i].Email);
 =======
                 mail.From = new MailAddress("trent.test1234@gmail.com", $"The {sweepstakes.Name} Sweepstakes");
 >>>>>>> 4235155... changed accessibility to methods in UserInterface
+=======
+                mail.From = new MailAddress(Credentials.USERNAME, $"The {sweepstakes.Name} Sweepstakes");
+>>>>>>> af82a5d... added dependency injection into MarketingFirm class
                 smtpClient.Port = 25;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
