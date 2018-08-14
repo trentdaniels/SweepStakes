@@ -176,56 +176,18 @@ namespace SweepStakes
 
         public static void EmailContestants(Sweepstakes sweepstakes)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            string from = "trent.test1234@gmail.com";
-=======
-            
->>>>>>> 4235155... changed accessibility to methods in UserInterface
-=======
->>>>>>> 25aa563... cleaned up code on user interface
-=======
->>>>>>> 25aa563a48dfa53243dbb14f38e7a23549497fee
             for (int i = 0; i < sweepstakes.Contestants.Count; i ++)
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                mail.From = new MailAddress(from, "Trent Daniels");
-                mail.To.Add(sweepstakes.Contestants[i].Email);
-=======
-                mail.From = new MailAddress("trent.test1234@gmail.com", $"The {sweepstakes.Name} Sweepstakes");
->>>>>>> 4235155... changed accessibility to methods in UserInterface
-=======
                 mail.From = new MailAddress(Credentials.USERNAME, $"The {sweepstakes.Name} Sweepstakes");
->>>>>>> af82a5d... added dependency injection into MarketingFirm class
-=======
-                mail.From = new MailAddress(Credentials.USERNAME, $"The {sweepstakes.Name} Sweepstakes");
->>>>>>> 25aa563a48dfa53243dbb14f38e7a23549497fee
                 smtpClient.Port = 25;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Host = "smtp.gmail.com";
                 smtpClient.EnableSsl = true;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-                smtpClient.Credentials = new NetworkCredential("trent.test1234@gmail.com", "daniels4");
-=======
-                smtpClient.Credentials = new NetworkCredential(Credentials.USERNAME, Credentials.PASSWORD);
                 mail.To.Add(sweepstakes.Contestants[i].Email);
->>>>>>> 4235155... changed accessibility to methods in UserInterface
-=======
-
                 smtpClient.Credentials = new NetworkCredential(Credentials.USERNAME, Credentials.PASSWORD);
->>>>>>> 25aa563... cleaned up code on user interface
-=======
-                smtpClient.Credentials = new NetworkCredential(Credentials.USERNAME, Credentials.PASSWORD);
->>>>>>> 25aa563a48dfa53243dbb14f38e7a23549497fee
                 if (sweepstakes.Contestants[i].Email == sweepstakes.Winner.Email)
                 {
                     mail.Subject = $"CONGRATULATIONS!";
