@@ -72,7 +72,7 @@ namespace SweepStakes
             return selectedContestant;
         }
 
-        private static void ViewContestant(Sweepstakes sweepstakes)
+        private static void HandleContestantProfileView(Sweepstakes sweepstakes)
         {
             DisplayContestants(sweepstakes);
             string selectedContestant = SelectContestant();
@@ -81,18 +81,13 @@ namespace SweepStakes
                 if (selectedContestant == sweepstakes.Contestants[i].RegistrationNumber.ToString())
                 {
                     Console.WriteLine("Found Contestant:");
-                    DisplayContestantInformation(sweepstakes.Contestants[i]);
+                    DisplayContestant(sweepstakes.Contestants[i]);
                 }
             }
         }
 
-        private static void DisplayContestantInformation(Contestant contestant)
+        public static void DisplayContestant(Contestant contestant)
         {
-            if (contestant == null)
-            {
-                Console.WriteLine("The winner has not been found yet!");
-                return;
-            }
             Console.WriteLine($"Name: {contestant.FullName}\nEmail: {contestant.Email}\nRegistration Number: {contestant.RegistrationNumber}\nWinner: {(contestant.IsWinner ? "Yes" : "No")}");
         }
 
@@ -108,7 +103,7 @@ namespace SweepStakes
         public static void DisplayManagerMenu(ISweepstakesManager manager)
         {
             Console.WriteLine("Main Menu:");
-            Console.WriteLine("[1]Create Sweepstake\n[2]Go To Sweepstake Menu");
+            Console.WriteLine("[1]Create Sweepstake\n[2]Go To Sweepstake");
             string userInput = Console.ReadLine();
             switch (userInput)
             {
@@ -153,13 +148,13 @@ namespace SweepStakes
                     EmailContestants(sweepstake);
                     break;
                 case "3":
-                    DisplayContestants(sweepstake);
+                    sweepstake.DisplayContestants();
                     break;
                 case "4":
-                    ViewContestant(sweepstake);
+                    HandleContestantProfileView(sweepstake);
                     break;
                 case "5":
-                    DisplayContestantInformation(sweepstake.Winner);
+                    DisplayContestant(sweepstake.Winner);
                     break;
                 case "6":
                     return;
@@ -179,9 +174,8 @@ namespace SweepStakes
             contestant.FullName = $"{contestant.FirstName} {contestant.LastName}";
         }
 
-        private static void EmailContestants(Sweepstakes sweepstakes)
+        public static void EmailContestants(Sweepstakes sweepstakes)
         {
-            
             for (int i = 0; i < sweepstakes.Contestants.Count; i ++)
             {
                 MailMessage mail = new MailMessage();
@@ -192,8 +186,8 @@ namespace SweepStakes
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Host = "smtp.gmail.com";
                 smtpClient.EnableSsl = true;
+
                 smtpClient.Credentials = new NetworkCredential(Credentials.USERNAME, Credentials.PASSWORD);
-                mail.To.Add(sweepstakes.Contestants[i].Email);
                 if (sweepstakes.Contestants[i].Email == sweepstakes.Winner.Email)
                 {
                     mail.Subject = $"CONGRATULATIONS!";
