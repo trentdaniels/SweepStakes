@@ -186,7 +186,7 @@ namespace SweepStakes
             {
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient();
-                mail.From = new MailAddress("trent.test1234@gmail.com", $"The {sweepstakes.Name} Sweepstakes");
+                mail.From = new MailAddress(Credentials.USERNAME, $"The {sweepstakes.Name} Sweepstakes");
                 smtpClient.Port = 25;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;

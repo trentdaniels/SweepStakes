@@ -7,14 +7,14 @@ namespace SweepStakes
     public class SweepstakesQueueManager : ISweepstakesManager
     {
         // Member Variables
-        private Queue<Sweepstakes> queue;
+        private Queue<Sweepstakes> queueOfSweepstakes;
 
-        public Queue<Sweepstakes> Queue { get => queue; set => queue = value; }
+        public Queue<Sweepstakes> QueueOfSweepstakes { get => queueOfSweepstakes; set => queueOfSweepstakes = value; }
 
         // Constructors
         public SweepstakesQueueManager()
         {
-            queue = new Queue<Sweepstakes>();
+            queueOfSweepstakes = new Queue<Sweepstakes>();
         }
 
         // Methods
@@ -23,11 +23,11 @@ namespace SweepStakes
             DisplaySweepstakes();
             Console.WriteLine("Which sweepstake would you like to go to?");
             string selectedSweepstake = Console.ReadLine();
-            for (int i = 0; i < queue.Count; i++)
+            for (int i = 0; i < queueOfSweepstakes.Count; i++)
             {
-                if (selectedSweepstake.ToLower() == queue.ElementAt(i).Name.ToLower())
+                if (selectedSweepstake.ToLower() == queueOfSweepstakes.ElementAt(i).Name.ToLower())
                 {
-                    return queue.ElementAt(i);
+                    return queueOfSweepstakes.ElementAt(i);
                 }
             }
             UserInterface.DisplayErrorMessage();
@@ -36,12 +36,12 @@ namespace SweepStakes
 
         public void InsertSweepstakes(Sweepstakes sweepstakes)
         {
-            queue.Enqueue(sweepstakes);
+            queueOfSweepstakes.Enqueue(sweepstakes);
         }
 
         public void DisplaySweepstakes()
         {
-            foreach (Sweepstakes sweepstake in queue)
+            foreach (Sweepstakes sweepstake in queueOfSweepstakes)
             {
                 Console.WriteLine("Here are your current sweepstakes:");
                 Console.WriteLine(sweepstake.Name);
